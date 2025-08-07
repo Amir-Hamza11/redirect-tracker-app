@@ -4,8 +4,6 @@ const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
 const path = require("path"); // ✅ NEW
 
-
-
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -13,8 +11,8 @@ app.use(cors());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// ✅ NEW: Serve static HTML files from frontend/public
-const publicPath = path.join(__dirname, "../frontend/public");
+// ✅ NEW: Serve static HTML files from frontend/dist
+const publicPath = path.join(__dirname, "../frontend/dist");
 app.use(express.static(publicPath));
 
 // Create DB and Table
