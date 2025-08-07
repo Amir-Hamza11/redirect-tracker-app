@@ -4,11 +4,13 @@ FROM node:18
 # Set working directory inside container
 WORKDIR /app
 
-# Copy everything into container
-COPY . .
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+
+# Copy everything into container
+COPY . .
 
 # Expose port
 EXPOSE 3001
