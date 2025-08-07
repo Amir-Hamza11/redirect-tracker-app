@@ -7,6 +7,9 @@ const path = require("path"); // ✅ NEW
 const app = express();
 const port = process.env.PORT || 3001;
 
+// Serve static files from public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(cors());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -51,12 +54,12 @@ app.get("/redirect/:status", (req, res) => {
       // ✅ Serve correct static HTML file
       const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-res.render("status", {
-  pid,
-  uid,
-  status,
-  ip,
-});
+      res.render("status", {
+        pid,
+        uid,
+        status,
+        ip,
+      });
     }
   );
 });
