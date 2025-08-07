@@ -32,7 +32,7 @@ const App = () => {
   };
 
   const fetchData = () => {
-    axios.get("http://localhost:3001/data").then((res) => setData(res.data));
+    axios.get(`${process.env.REACT_APP_API_URL}/data`).then((res) => setData(res.data));
   };
 
   const filtered = data.filter((entry) => {
