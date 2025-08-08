@@ -5,6 +5,7 @@ const cors = require("cors");
 const path = require("path"); // ✅ NEW
 
 const app = express();
+app.set('trust proxy', true); // 👈 Add this line to trust proxies/ keep ip address consistant
 const port = process.env.PORT || 3001;
 
 // Serve static files from public folder
@@ -36,7 +37,7 @@ db.run(`
 app.get("/redirect/:status", (req, res) => {
   const { status } = req.params;
   const { pid, uid } = req.query;
-  const ipAddress = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+  const ip= req.headers["x-forwarded-for"] || req.socket.remoteAddress;
   const timestamp = new Date().toISOString();
 
   if (!["complete", "terminate", "quotafull"].includes(status)) {
@@ -52,7 +53,7 @@ app.get("/redirect/:status", (req, res) => {
       }
 
       // ✅ Serve correct static HTML file
-      const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+      // const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
       res.render("status", {
         pid,
