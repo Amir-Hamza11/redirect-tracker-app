@@ -31,22 +31,11 @@ const App = () => {
     setInputPassword("");
   };
 
-  // axios.get(`${import.meta.env.REACT_APP_API_URL}/data`)
+  // axios.get(`${import.meta.env.REACT_APP_API_URL}/data`) not working in production
+  // Use the hardcoded URL for production
   const fetchData = () => {
-    axios.get(`${import.meta.env.REACT_APP_API_URL}/data`).then((res) => setData(res.data));
-    console.log(data);
+    axios.get("https://redirect-tracker-app-production.up.railway.app/data").then((res) => setData(res.data));
   };
-
-  // const fetchData = () => {
-  //   axios.get(`${process.env.REACT_APP_API_URL}/data`)
-  //     .then((res) => {
-  //       setData(res.data);
-  //       console.log(res.data); // ✅ Log the actual response here
-  //     })
-  //     .catch((err) => {
-  //       console.error("Error fetching data:", err); // helpful in debug
-  //     });
-  // };
 
   const filtered = data.filter((entry) => {
     const pidMatch = entry.pid.toLowerCase().includes(search.pid.toLowerCase());
