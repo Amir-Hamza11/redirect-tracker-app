@@ -31,8 +31,9 @@ const App = () => {
     setInputPassword("");
   };
 
+  // axios.get(`${import.meta.env.REACT_APP_API_URL}/data`)
   const fetchData = () => {
-    axios.get("https://redirect-tracker-app-production.up.railway.app/data").then((res) => setData(res.data));
+    axios.get(`${import.meta.env.REACT_APP_API_URL}/data`).then((res) => setData(res.data));
     console.log(data);
   };
 
