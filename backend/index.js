@@ -37,7 +37,7 @@ db.run(`
 app.get("/redirect/:status", (req, res) => {
   const { status } = req.params;
   const { pid, uid } = req.query;
-  const ip= req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+  const ipaddress= req.headers["x-forwarded-for"] || req.socket.remoteAddress;
   const timestamp = new Date().toISOString();
 
   if (!["complete", "terminate", "quotafull"].includes(status)) {
@@ -46,7 +46,7 @@ app.get("/redirect/:status", (req, res) => {
 
   db.run(
     `INSERT INTO redirects (pid, uid, status, timestamp, ipaddress) VALUES (?, ?, ?, ?, ?)`,
-    [pid, uid, status, timestamp, ipAddress],
+    [pid, uid, status, timestamp, ipaddress],
     (err) => {
       if (err) {
         return res.status(500).send("Database error.");
@@ -59,7 +59,7 @@ app.get("/redirect/:status", (req, res) => {
         pid,
         uid,
         status,
-        ip,
+        ipaddress,
       });
     }
   );
